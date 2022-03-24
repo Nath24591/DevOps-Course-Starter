@@ -1,18 +1,33 @@
 {% extends "layout.html" %}
-{% block title %}To-Do App{% endblock %}
+{% block title %}{% endblock %}
 
 {% block content %}
-  <div class="jumbotron">
-    <h1 class="display-4">To-Do App</h1>
-    <p class="lead">Just another to-do app.</p>
+  <div class="jumbotron" style="text-align: center;" >
+    <h1 class="display-4">Task Planner</h1>
+    <p class="lead">Here to help you plan your day!</p>
   </div>
 
-  <div class="row">
+  <div style="text-align: center; margin: auto; width: 40%;">
+    <h3>Add a new task</h3>
+    <form action="/addItem" method="post" >
+      <div class="form-group">
+        <input type="text" class="form-control" id="title" name="title" aria-describedby="titleHelp" placeholder="Enter title of task">
+      </div>
+      <button  type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <div class="row" style="list-style-position: inside;">
     <div class="col-md-12">
-      <h2>Items</h2>
+      <h2>Current tasks</h2>
+      {% for item in items%}
       <ul class="list-group mb-4">
-        <!-- List the todo items here -->
+        <li>{{item.title}}</li>
+          <ul>
+            <li>{{item.status}}</li>
+          </ul>
       </ul>
+      {% endfor %}
     </div>
   </div>
 {% endblock %}
